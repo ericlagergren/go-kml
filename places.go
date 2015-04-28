@@ -9,6 +9,17 @@ type Placemark struct {
 	Polygon      *Polygon      `xml:"Polygon"`
 }
 
+func (k *KML) SetPlacemark(style *Style, data *ExtendedData, polygon *Polygon) {
+
+	if k.Document.Placemark == nil {
+		k.Document.Placemark = &Placemark{}
+	}
+
+	k.Document.Placemark.Style = style
+	k.Document.Placemark.ExtendedData = data
+	k.Document.Placemark.Polygon = polygon
+}
+
 type Polygon struct {
 	XMLName         xml.Name         `xml:"Polygon"`
 	OuterBoundaryIs *OuterBoundaryIs `xml:"outerBoundaryIs"`

@@ -21,7 +21,7 @@ const (
 type displayModeEnum int
 
 const (
-	Default displayModeEnum = iota // lowercase 'default' is reserved
+	_default displayModeEnum = iota // lowercase 'default' is reserved
 	hide
 )
 

@@ -25,7 +25,6 @@ type LabelStyle struct {
 // AbstractStyleSelectorGroup.
 // Section 12.2.1
 type Style struct {
-	XMLName    xml.Name      `xml:"Style"`
 	Icon       *IconStyle    `xml:"IconStyle"`
 	Label      *LabelStyle   `xml:"LabelStyle"`
 	Line       *LineStyle    `xml:"LineStyle"`
@@ -43,13 +42,11 @@ type IconStyle struct {
 }
 
 type LineStyle struct {
-	XMLName xml.Name `xml:"LineStyle"`
-	Color   string   `xml:"color"`
+	Color string `xml:"color"`
 }
 
 type PolyStyle struct {
-	XMLName xml.Name `xml:"PolyStyle"`
-	Fill    string   `xml:"fill"`
+	Fill string `xml:"fill"`
 }
 
 // 12.6

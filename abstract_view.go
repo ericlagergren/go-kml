@@ -2,29 +2,43 @@ package kml
 
 // import "encoding/xml"
 
+func newAbstractView() abstractView {
+	return abstractView{object: newObject()}
+}
+
 // This is an abstract element and cannot be used directly in a KML file.
 // This element is extended by the <Camera> and <LookAt> elements.
 type abstractView struct {
 	object
 }
 
+func NewCamera() *Camera {
+	return &Camera{abstractView: newAbstractView()}
+}
+
 type Camera struct {
 	abstractView
-	longitude angle180
-	latitude  angle90
-	altitude  float64
-	heading   angle360
-	tilt      anglePos180
-	roll      angle180
+
+	Longitude angle180    `xml:"longitude"`
+	Latitude  angle90     `xml:"latitude"`
+	Altitude  float64     `xml:"altitude"`
+	Heading   angle360    `xml:"heading"`
+	Tilt      anglePos180 `xml:"tilt"`
+	Roll      angle180    `xml:"roll"`
+}
+
+func NewLookAt() *LookAt {
+	return &LookAt{abstractView: newAbstractView()}
 }
 
 type LookAt struct {
 	abstractView
-	longitude    angle180
-	latitude     angle90
-	altitude     float64
-	heading      angle360
-	tilt         anglePos180
-	_range       float64 // 'range' is a reserved word
-	altitudeMode altitudeModeEnum
+
+	Longitude    angle180         `xml:"longitude"`
+	Latitude     angle90          `xml:"latitude"`
+	Altitude     float64          `xml:"altitude"`
+	Heading      angle360         `xml:"heading"`
+	Tilt         anglePos180      `xml:"tilt"`
+	Range        float64          `xml:"range"`
+	AltitudeMode altitudeModeEnum `xml:"altitudeMode"`
 }

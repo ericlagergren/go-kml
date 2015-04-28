@@ -10,19 +10,20 @@ import "encoding/xml"
 // TODO AddressDetails
 type feature struct {
 	object
-	name       string `xml:"name"`
-	visibility bool   `xml:"visibility"`
-	open       int    `xml:"open"` // bool, but either 1 or 0
+
+	Name       string `xml:"name"`
+	Visibility bool   `xml:"visibility"`
+	Open       int    `xml:"open"` // bool, but either 1 or 0
 	// author
 	// name
 	// link
 	// href
-	address string `xml:"address"`
+	Address string `xml:"address"`
 	// AddressDetails
-	phoneNumber  string `xml:"phoneNumber"` // RFC2806
-	snippet      *Snippet
-	description  string
-	abstractView *abstractView `xml:"AbstractView"`
+	PhoneNumber  string `xml:"phoneNumber"` // RFC2806
+	Snippet      *Snippet
+	Description  string
+	AbstractView *abstractView `xml:"AbstractView"`
 }
 
 // A short description of the feature.
@@ -30,6 +31,6 @@ type feature struct {
 // number of lines to display.
 type Snippet struct {
 	XMLName  xml.Name `xml:"Snippet"`
-	maxLines int      `xml:"maxLines,attr"`
+	MaxLines int      `xml:"maxLines,attr"`
 	snippet  string   `xml:",chardata"`
 }

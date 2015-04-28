@@ -8,3 +8,7 @@ type object struct {
 	id       string `xml:"id,attr"`
 	targetId string `xml:"targetId,attr"`
 }
+
+func newObject() object {
+	return object{}
+}
