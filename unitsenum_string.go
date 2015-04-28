@@ -4,7 +4,7 @@ package kml
 
 import "fmt"
 
-const _unitsEnum_name = "fractionpixelsinsetPixels"
+const _unitsEnum_name = "FractionPixelsInsetPixels"
 
 var _unitsEnum_index = [...]uint8{0, 8, 14, 25}
 

@@ -4,7 +4,7 @@ package kml
 
 import "fmt"
 
-const _refreshModeEnum_name = "onChangeonIntervalonExpire"
+const _refreshModeEnum_name = "OnChangeOnIntervalOnExpire"
 
 var _refreshModeEnum_index = [...]uint8{0, 8, 18, 26}
 

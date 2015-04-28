@@ -21,17 +21,20 @@ func (k *KML) SetPlacemark(style *Style, data *ExtendedData, polygon *Polygon) {
 }
 
 type Polygon struct {
-	XMLName         xml.Name         `xml:"Polygon"`
-	OuterBoundaryIs *OuterBoundaryIs `xml:"outerBoundaryIs"`
-	LinearRing      *LinearRing      `xml:"LinearRing"`
+	Extrude       string           `xml:"extrude,omitempty"`
+	AltitudeMode  altitudeModeEnum `xml:"altitudeMode,omitempty"`
+	OuterBoundary *OuterBoundaryIs `xml:"outerBoundaryIs"`
+	InnerBoundary *InnerBoundaryIs `xml:"innerBoundaryIs"`
 }
 
 type OuterBoundaryIs struct {
-	XMLName    xml.Name    `xml:"outerBoundaryIs"`
+	LinearRing *LinearRing `xml:"LinearRing"`
+}
+
+type InnerBoundaryIs struct {
 	LinearRing *LinearRing `xml:"LinearRing"`
 }
 
 type LinearRing struct {
-	XMLName     xml.Name `xml:"LinearRing"`
-	Coordinates string   `xml:"coordinates"`
+	Coordinates string `xml:"coordinates"`
 }

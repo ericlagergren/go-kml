@@ -4,69 +4,69 @@ package kml
 type altitudeModeEnum int
 
 const (
-	clampToGround altitudeModeEnum = iota
-	relativeToGround
-	absolute
+	ClampToGround altitudeModeEnum = iota
+	RelativeToGround
+	Absolute
 )
 
 //go:generate stringer -type=colorModeEnum
 type colorModeEnum int
 
 const (
-	normal colorModeEnum = iota
-	random
+	Normal colorModeEnum = iota
+	Random
 )
 
 //go:generate stringer -type=displayModeEnum
 type displayModeEnum int
 
 const (
-	_default displayModeEnum = iota // lowercase 'default' is reserved
-	hide
+	Default displayModeEnum = iota
+	Hide
 )
 
 //go:generate stringer -type=gridOriginEnum
 type gridOriginEnum int
 
 const (
-	lowerLeft gridOriginEnum = iota
-	upperLeft
+	LowerLeft gridOriginEnum = iota
+	UpperLeft
 )
 
 //go:generate stringer -type=listItemEnum
 type listItemEnum int
 
 const (
-	check listItemEnum = iota
-	radioFolder
-	checkOffOnly
-	checkHideChildren
+	Check listItemEnum = iota
+	RadioFolder
+	CheckOffOnly
+	CheckHideChildren
 )
 
 //go:generate stringer -type=refreshModeEnum
 type refreshModeEnum int
 
 const (
-	onChange refreshModeEnum = iota
-	onInterval
-	onExpire
+	OnChange refreshModeEnum = iota
+	OnInterval
+	OnExpire
 )
 
 //go:generate stringer -type=unitsEnum
 type unitsEnum int
 
 const (
-	fraction unitsEnum = iota
-	pixels
-	insetPixels
+	Fraction unitsEnum = iota
+	Pixels
+	InsetPixels
 )
 
 //go:generate stringer -type=viewRefreshEnum
 type viewRefreshEnum int
 
 const (
-	never viewRefreshEnum = iota
-	onRequest
-	onStop
-	onRegion
+	Never viewRefreshEnum = iota
+	OnRequest
+	OnStop
+	OnRegion
 )

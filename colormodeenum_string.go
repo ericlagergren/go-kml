@@ -4,7 +4,7 @@ package kml
 
 import "fmt"
 
-const _colorModeEnum_name = "normalrandom"
+const _colorModeEnum_name = "NormalRandom"
 
 var _colorModeEnum_index = [...]uint8{0, 6, 12}
 

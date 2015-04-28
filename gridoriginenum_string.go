@@ -4,7 +4,7 @@ package kml
 
 import "fmt"
 
-const _gridOriginEnum_name = "lowerLeftupperLeft"
+const _gridOriginEnum_name = "LowerLeftUpperLeft"
 
 var _gridOriginEnum_index = [...]uint8{0, 9, 18}
 

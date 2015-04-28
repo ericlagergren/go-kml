@@ -4,7 +4,7 @@ package kml
 
 import "fmt"
 
-const _altitudeModeEnum_name = "clampToGroundrelativeToGroundabsolute"
+const _altitudeModeEnum_name = "ClampToGroundRelativeToGroundAbsolute"
 
 var _altitudeModeEnum_index = [...]uint8{0, 13, 29, 37}
 

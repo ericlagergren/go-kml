@@ -4,7 +4,7 @@ package kml
 
 import "fmt"
 
-const _viewRefreshEnum_name = "neveronRequestonStoponRegion"
+const _viewRefreshEnum_name = "NeverOnRequestOnStopOnRegion"
 
 var _viewRefreshEnum_index = [...]uint8{0, 5, 14, 20, 28}
 

@@ -4,9 +4,9 @@ package kml
 
 import "fmt"
 
-const _displayModeEnum_name = "_defaulthide"
+const _displayModeEnum_name = "DefaultHide"
 
-var _displayModeEnum_index = [...]uint8{0, 8, 12}
+var _displayModeEnum_index = [...]uint8{0, 7, 11}
 
 func (i displayModeEnum) String() string {
 	if i < 0 || i+1 >= displayModeEnum(len(_displayModeEnum_index)) {

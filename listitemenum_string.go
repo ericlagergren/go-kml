@@ -4,7 +4,7 @@ package kml
 
 import "fmt"
 
-const _listItemEnum_name = "checkradioFoldercheckOffOnlycheckHideChildren"
+const _listItemEnum_name = "CheckRadioFolderCheckOffOnlyCheckHideChildren"
 
 var _listItemEnum_index = [...]uint8{0, 5, 16, 28, 45}
 
