@@ -1,9 +1,6 @@
 package kml
 
-import "encoding/xml"
-
 type Placemark struct {
-	XMLName      xml.Name      `xml:"Placemark"`
 	Style        *Style        `xml:"Style"`
 	ExtendedData *ExtendedData `xml:"ExtendedData"`
 	Polygon      *Polygon      `xml:"Polygon"`
@@ -12,12 +9,13 @@ type Placemark struct {
 func (k *KML) SetPlacemark(style *Style, data *ExtendedData, polygon *Polygon) {
 
 	if k.Document.Folder.Placemark == nil {
-		k.Document.Folder.Placemark = &Placemark{}
+		k.Document.Folder.Placemark = make([]Placemark, 1)
 	}
 
-	k.Document.Folder.Placemark.Style = style
-	k.Document.Folder.Placemark.ExtendedData = data
-	k.Document.Folder.Placemark.Polygon = polygon
+	placemark := Placemark{style, data, polygon}
+
+	k.Document.Folder.Placemark = append(
+		k.Document.Folder.Placemark, placemark)
 }
 
 type Polygon struct {

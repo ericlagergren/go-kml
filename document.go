@@ -38,16 +38,16 @@ func (k *KML) SetDocument(folder *Folder) {
 type Folder struct {
 	object
 
-	XMLName   struct{}   `xml:"Folder"`
-	Name      string     `xml:"name"`
-	Schema    *Schema    `xml:"Schema"`
-	Placemark *Placemark `xml:"Placemark"`
+	XMLName   struct{}    `xml:"Folder"`
+	Name      string      `xml:"name"`
+	Schema    *Schema     `xml:"Schema"`
+	Placemark []Placemark `xml:"Placemark"`
 }
 
 // Set the Folder tag on a KML structure.
 func (k *KML) SetFolder(name string, schema *Schema, placemark *Placemark) {
 	k.Document.Folder = &Folder{
-		Name: name, Schema: schema, Placemark: placemark,
+		Name: name, Schema: schema, Placemark: make([]Placemark, 1),
 	}
 }
 
