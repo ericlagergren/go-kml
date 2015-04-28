@@ -27,27 +27,28 @@ type Document struct {
 
 	XMLName struct{} `xml:"Document"`
 
-	Folder    *Folder    `xml:"Folder"`
-	Placemark *Placemark `xml:"Placemark"`
+	Folder *Folder `xml:"Folder"`
 }
 
 // Set the Document tag on a KML structure.
-func (k *KML) SetDocument(folder *Folder, placemark *Placemark) {
+func (k *KML) SetDocument(folder *Folder) {
 	k.Document.Folder = folder
-	k.Document.Placemark = placemark
 }
 
 type Folder struct {
 	object
 
-	XMLName struct{} `xml:"Folder"`
-	Name    string   `xml:"name"`
-	Schema  *Schema  `xml:"Schema"`
+	XMLName   struct{}   `xml:"Folder"`
+	Name      string     `xml:"name"`
+	Schema    *Schema    `xml:"Schema"`
+	Placemark *Placemark `xml:"Placemark"`
 }
 
 // Set the Folder tag on a KML structure.
-func (k *KML) SetFolder(name string, schema *Schema) {
-	k.Document.Folder = &Folder{Name: name, Schema: schema}
+func (k *KML) SetFolder(name string, schema *Schema, placemark *Placemark) {
+	k.Document.Folder = &Folder{
+		Name: name, Schema: schema, Placemark: placemark,
+	}
 }
 
 type Schema struct {

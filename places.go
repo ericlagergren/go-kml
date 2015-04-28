@@ -11,13 +11,13 @@ type Placemark struct {
 
 func (k *KML) SetPlacemark(style *Style, data *ExtendedData, polygon *Polygon) {
 
-	if k.Document.Placemark == nil {
-		k.Document.Placemark = &Placemark{}
+	if k.Document.Folder.Placemark == nil {
+		k.Document.Folder.Placemark = &Placemark{}
 	}
 
-	k.Document.Placemark.Style = style
-	k.Document.Placemark.ExtendedData = data
-	k.Document.Placemark.Polygon = polygon
+	k.Document.Folder.Placemark.Style = style
+	k.Document.Folder.Placemark.ExtendedData = data
+	k.Document.Folder.Placemark.Polygon = polygon
 }
 
 type Polygon struct {
