@@ -12,12 +12,12 @@ type KML struct {
 	Document *Document
 }
 
-// Create a new file structure with a generic object with NameSpace and
-// and empty document.
+// Create a new file structure with a generic object (with NameSpace) and
+// and an empty document.
 func NewFile() *KML {
 	object := newObject()
 	name := xml.Name{Local: "xml", Space: NameSpace}
-	document := &Document{}
+	document := new(Document)
 	return &KML{object, name, document}
 }
 
@@ -25,14 +25,12 @@ func NewFile() *KML {
 type Document struct {
 	object
 
-	XMLName struct{} `xml:"Document"`
-
 	Folder *Folder `xml:"Folder"`
 }
 
-// Set the Document tag on a KML structure.
+// Set the Document tag content on a KML structure.
 func (k *KML) SetDocument(folder *Folder) {
-	k.Document.Folder = folder
+	k.Document = &Document{Folder: folder}
 }
 
 type Folder struct {
@@ -44,10 +42,12 @@ type Folder struct {
 	Placemark []Placemark `xml:"Placemark"`
 }
 
-// Set the Folder tag on a KML structure.
+// Set the Folder tag content on a KML structure.
 func (k *KML) SetFolder(name string, schema *Schema, placemark *Placemark) {
 	k.Document.Folder = &Folder{
-		Name: name, Schema: schema, Placemark: make([]Placemark, 1),
+		Name:      name,
+		Schema:    schema,
+		Placemark: make([]Placemark, 1),
 	}
 }
 
