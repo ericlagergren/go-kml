@@ -52,16 +52,16 @@ func (k *KML) SetFolder(name string, schema *Schema, placemark *Placemark) {
 }
 
 type Schema struct {
-	XMLName      struct{}      `xml:"Schema"`
-	Name         string        `xml:"name,attr"`
-	Id           string        `xml:"id,attr"`
-	SimpleFields []SimpleField `xml:"SimpleField"`
+	XMLName     struct{}      `xml:"Schema"`
+	Name        string        `xml:"name,attr"`
+	Id          string        `xml:"id,attr"`
+	SimpleField []SimpleField `xml:"SimpleField"`
 }
 
 // Set the Schema tag on a KML structure.
 func (k *KML) SetSchema(name, id string, fields []SimpleField) {
 	k.Document.Folder.Schema = &Schema{
-		Name: name, Id: id, SimpleFields: fields,
+		Name: name, Id: id, SimpleField: fields,
 	}
 }
 
@@ -72,7 +72,7 @@ type SimpleField struct {
 
 // Append a SimpleField to the KML's schema.
 func (k *KML) SetSimpleField(name, typ string) {
-	k.Document.Folder.Schema.SimpleFields = append(
-		k.Document.Folder.Schema.SimpleFields, SimpleField{name, typ},
+	k.Document.Folder.Schema.SimpleField = append(
+		k.Document.Folder.Schema.SimpleField, SimpleField{name, typ},
 	)
 }
