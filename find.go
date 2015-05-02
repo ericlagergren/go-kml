@@ -1,53 +1,51 @@
 package kml
 
-import (
-	"reflect"
-)
+import "reflect"
 
-var vX = reflect.Value{}
-
-type valContainer struct {
-	Vals []reflect.Value
+type FieldVal struct {
+	Vals []reflect.StructField
 }
 
-// Finds the given TAG with the given ATTRibute. OFF is the offset of the
-// element you want. -1 is all, 0 is the first, 1 is the second, etc.
-// Will return an index error if OFF is out of the range.
-func (k *KML) Find(tag, attr string, off int) []reflect.Value {
+// Searches the *KML structure for the given tag. E.g., Document, Name, etc.
+// Unexported tags cannot be found.
+func (k *KML) Find(tag, attr string) *FieldVal {
 
-	vC := &valContainer{Vals: make([]reflect.Value, 0)}
-	vC.traverse(k, tag, findTag)
+	vals := &FieldVal{Vals: make([]reflect.StructField, 0)}
+	vals.traverse(k, tag, attr, findTag)
 
-	if off != -1 {
-		return vC.Vals[off : off+1]
-	}
-
-	return vC.Vals
+	return vals
 }
 
 // Searches a struct a tag. Returns false if it's not found.
-func findTag(v interface{}, tag string) (reflect.Value, bool) {
-	val := reflect.ValueOf(v)
+func findTag(v *interface{}, tag, attr string) (reflect.StructField, bool) {
+	typ := reflect.TypeOf(*v)
 
-	f := val.FieldByName(tag)
+	field, ok := typ.FieldByName(tag)
+	if !ok {
+		return field, false
+	}
 
-	return f, f.IsValid()
+	return field, true
 }
 
 // Traverse the KML structure, calling fn for each struct element.
-func (vC *valContainer) traverse(v interface{}, tag string, fn func(interface{}, string) (reflect.Value, bool)) {
+func (fv *FieldVal) traverse(v interface{}, tag, attr string, fn func(*interface{}, string, string) (reflect.StructField, bool)) {
 
 	val := reflect.ValueOf(v)
-	if val.Kind() != reflect.Struct {
-		if val.Kind() == reflect.Ptr {
-			val = val.Elem()
-		} else if val.Kind() == reflect.Slice {
-			for i := 0; i < val.Len(); i++ {
-				vC.traverse(val.Slice(i, i+1), tag, fn)
-			}
-		} else {
-			return
+
+	switch val.Kind() {
+	case reflect.Struct:
+	case reflect.Ptr:
+		// Dereference pointer
+		val = val.Elem()
+	case reflect.Slice:
+		// Check each item in the slice because it may be a struct!
+		for i := 0; i < val.Len(); i++ {
+			fv.traverse(val.Slice(i, i+1), tag, attr, fn)
 		}
+	default:
+		// We only want the above 3 types.
+		return
 	}
 
 	var iface interface{}
@@ -55,8 +53,8 @@ func (vC *valContainer) traverse(v interface{}, tag string, fn func(interface{},
 		iface = val.Interface()
 	}
 
-	if rv, b := fn(iface, tag); b {
-		vC.Vals = append(vC.Vals, rv)
+	if rv, b := fn(&iface, tag, attr); b {
+		fv.Vals = append(fv.Vals, rv)
 	}
 
 	n := val.NumField()
@@ -72,18 +70,18 @@ func (vC *valContainer) traverse(v interface{}, tag string, fn func(interface{},
 
 		switch reflect.ValueOf(field).Kind() {
 		case reflect.Ptr:
-			vC.traverse(field, tag, fn)
+			fv.traverse(field, tag, attr, fn)
 		case reflect.Struct:
-			if rv, b := fn(field, tag); b {
-				vC.Vals = append(vC.Vals, rv)
+			if rv, b := fn(&field, tag, attr); b {
+				fv.Vals = append(fv.Vals, rv)
 			}
-			vC.traverse(field, tag, fn)
+			fv.traverse(field, tag, attr, fn)
 		case reflect.Slice:
 			sl := tmp.Slice(0, 1)
 			if sl.Kind() != reflect.Struct {
 				break
 			}
-			vC.traverse(field, tag, fn)
+			fv.traverse(field, tag, attr, fn)
 		}
 	}
 }
